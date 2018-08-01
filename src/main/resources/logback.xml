@@ -77,6 +77,7 @@
 		</encoder>
 	</appender>
 
+	<!--<logger name="com.wx.mall.mapper" level="debug" additivity="false"/>-->
 
 	<root level="INFO">
 		<!-- 控制台输出 -->

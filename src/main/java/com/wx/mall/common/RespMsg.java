@@ -5,21 +5,21 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 /**
  * 请求返回信息
- * 
+ *
  * @author jjs 2016年10月14日 上午11:39:35
  */
 public class RespMsg<T> {
 
-    private int    status; // 0： 成功  1：失败   -1 | 500：服务器失败   
+    private int code; // 0： 成功  1：失败   -1 | 500：服务器失败
     private String msg;
-    private T      data;
+    private T data;
 
-    public int getStatus() {
-        return status;
+    public int getCode() {
+        return code;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -40,7 +40,7 @@ public class RespMsg<T> {
 
     @Override
     public String toString() {
-    	
+
         return JSON.toJSONString(this, SerializerFeature.WriteMapNullValue);
     }
 
