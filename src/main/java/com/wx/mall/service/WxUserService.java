@@ -7,7 +7,7 @@ import com.wx.mall.entity.model.WxUser;
  */
 public interface WxUserService {
 
-    int saveUser(WxUser user);
+    int saveUser(String code, WxUser user);
 
     WxUser checkLogin(String uid);
 }

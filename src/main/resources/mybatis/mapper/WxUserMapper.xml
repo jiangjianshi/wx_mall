@@ -53,6 +53,13 @@
         where a.id = #{uid}
     </select>
 
+    <select id="selectByOpenId" resultMap="beanMap">
+        select
+        <include refid="columns"/>
+        from wx_user a
+        where a.open_id = #{openId}
+    </select>
+
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="vo.id" parameterType="com.wx.mall.entity.model.WxUser">
         insert into wx_user

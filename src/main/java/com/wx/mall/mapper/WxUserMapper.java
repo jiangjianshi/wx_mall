@@ -12,5 +12,10 @@ public interface WxUserMapper {
 
     WxUser selectByPrimaryKey(Integer uid);
 
+
+    WxUser selectByOpenId(String openId);
+
     int insert(@Param("vo") WxUser vo);
+
+
 }

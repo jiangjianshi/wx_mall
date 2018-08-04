@@ -34,7 +34,7 @@ public class WxUserController extends BaseController {
                 user = JSON.parseObject(userinfo, WxUser.class);
                 user.setToken(code);
             }
-            int uid = wxUserService.saveUser(user);
+            int uid = wxUserService.saveUser(code, user);
             if (uid != 0) {
                 Map map = new HashMap();
                 map.put("token", code);
@@ -54,13 +54,13 @@ public class WxUserController extends BaseController {
     @RequestMapping("checkToken")
     public RespMsg<String> checkToken(String uid, String token) {
 
-        if(StringUtils.isEmpty(uid) || StringUtils.isEmpty(token)){
-            return  fail("未登录");
+        if (StringUtils.isEmpty(uid) || StringUtils.isEmpty(token)) {
+            return fail("未登录");
         }
-        WxUser user =  wxUserService.checkLogin(uid);
-        if (user != null){
+        WxUser user = wxUserService.checkLogin(uid);
+        if (user != null) {
             return success("已登录");
-        }else{
+        } else {
             return fail("未登录");
         }
 
