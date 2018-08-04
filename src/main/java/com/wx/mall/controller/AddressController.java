@@ -35,7 +35,7 @@ public class AddressController extends BaseController {
         try {
             List<Address> list = addressService.getAddressList(uid);
             return success("获取成功", list);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return fail("获取失败");
         }
@@ -46,7 +46,7 @@ public class AddressController extends BaseController {
         try {
             Address ads = addressService.getAddressDeatil(uid, id);
             return success("获取成功", ads);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return fail("获取失败");
         }
@@ -58,10 +58,20 @@ public class AddressController extends BaseController {
 
             int cnt = addressService.deleteAddress(id);
             return success("删除成功", cnt);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return fail("删除失败");
         }
     }
 
+    @RequestMapping("setDefault")
+    public RespMsg<Integer> setDefault(Integer uid, Integer id) {
+        int cnt = addressService.setDefault(uid, id);
+        if(cnt == 1){
+            return success("设置成功", cnt);
+
+        }else {
+            return fail("设置默认失败");
+        }
+    }
 }

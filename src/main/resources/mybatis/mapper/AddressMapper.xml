@@ -71,6 +71,10 @@
             #{vo.address},#{vo.mobile} ,#{vo.code},#{vo.isDefault},#{vo.status}, now(), now());
     </insert>
 
+    <update id="updateDefaultByUid">
+        UPDATE address a set a.is_default = #{isDefault} where a.uid = #{uid}
+    </update>
+
     <!-- 选择更新 -->
     <update id="updateSelective" parameterType="com.wx.mall.entity.model.Address">
         UPDATE address a

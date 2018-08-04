@@ -16,4 +16,6 @@ public interface AddressService {
     Address getAddressDeatil(Integer uid, Integer addressId);
 
     int deleteAddress(Integer addressId);
+
+    int setDefault(Integer uid, Integer addressId);
 }

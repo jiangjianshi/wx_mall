@@ -21,4 +21,6 @@ public interface AddressMapper {
 
    int updateSelective(@Param("vo") Address vo);
 
+   int updateDefaultByUid(@Param("isDefault") Integer isDefault, @Param("uid") Integer uid);
+
 }

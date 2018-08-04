@@ -3,6 +3,7 @@ package com.wx.mall.service.impl;
 import com.wx.mall.entity.model.Address;
 import com.wx.mall.mapper.AddressMapper;
 import com.wx.mall.service.AddressService;
+import io.netty.channel.AdaptiveRecvByteBufAllocator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,5 +50,17 @@ public class AddressServiceImpl implements AddressService {
         address.setId(addressId);
 
         return addressMapper.updateSelective(address);
+    }
+
+    @Override
+    public int setDefault(Integer uid, Integer addressId) {
+
+        addressMapper.updateDefaultByUid(0 ,uid);
+
+        Address ads = new Address();
+        ads.setId(addressId);
+        ads.setIsDefault(1);
+       int cnt =  addressMapper.updateSelective(ads);
+        return cnt;
     }
 }
