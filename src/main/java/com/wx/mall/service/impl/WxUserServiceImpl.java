@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional
-public class WxUserServiceImpl implements WxUserService{
+public class WxUserServiceImpl implements WxUserService {
 
     @Resource
     private WxUserMapper wxUserMapper;
@@ -22,7 +22,15 @@ public class WxUserServiceImpl implements WxUserService{
     @Override
     public int saveUser(WxUser user) {
 
-        wxUserMapper.selectByPrimaryKey(1);
-        return  wxUserMapper.insert(user);
+
+        int count = wxUserMapper.insert(user);
+        return user.getId();
+    }
+
+
+    @Override
+    public WxUser checkLogin(String uid) {
+
+        return wxUserMapper.selectByPrimaryKey(Integer.parseInt(uid));
     }
 }

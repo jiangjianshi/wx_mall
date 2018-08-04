@@ -15,6 +15,7 @@
         user_remark,
         gray_status,
         avatar_url,
+        token,
         login_time,
         create_time,
         update_time
@@ -33,6 +34,7 @@
         <result property="userRemark" column="user_remark"/>
         <result property="grayStatus" column="gray_status"/>
         <result property="avatarUrl" column="avatar_url"/>
+        <result property="token" column="token"/>
         <result property="loginTime" column="login_time"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
@@ -52,7 +54,7 @@
     </select>
 
 
-    <insert id="insert" parameterType="com.wx.mall.entity.model.WxUser">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="vo.id" parameterType="com.wx.mall.entity.model.WxUser">
         insert into wx_user
            ( open_id,
             nick_name,
@@ -64,13 +66,14 @@
             user_remark,
             gray_status,
             avatar_url,
+            token,
             login_time,
             create_time,
             update_time)
         values
             (#{vo.openId},#{vo.nickName},#{vo.gender},#{vo.city},#{vo.province},
             #{vo.country},#{vo.language} ,#{vo.userRemark},#{vo.grayStatus},
-            #{vo.avatarUrl},now(), now(), now());
+            #{vo.avatarUrl},#{vo.token}, now(), now(), now());
     </insert>
 
     <!-- 选择更新 -->
@@ -87,6 +90,7 @@
             <if test="vo.userRemark != null">a.user_remark = #{vo.userRemark},</if>
             <if test="vo.grayStatus != null">a.gray_status = #{vo.grayStatus},</if>
             <if test="vo.avatarUrl != null">a.avatar_url = #{vo.avatarUrl},</if>
+            <if test="vo.token != null">a.login_time = #{vo.token},</if>
             <if test="vo.loginTime != null">a.login_time = #{vo.loginTime},</if>
             <if test="vo.updateTime != null">a.update_time = now()</if>
         </trim>

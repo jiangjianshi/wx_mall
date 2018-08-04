@@ -1,13 +1,17 @@
 package com.wx.mall.controller;
 
+import com.alibaba.druid.util.StringUtils;
+import com.alibaba.fastjson.JSON;
 import com.wx.mall.common.RespMsg;
 import com.wx.mall.entity.model.WxUser;
 import com.wx.mall.service.WxUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by bairong on 2018/7/29.
@@ -21,24 +25,46 @@ public class WxUserController extends BaseController {
     private WxUserService wxUserService;
 
 
-    @RequestMapping("saveUser")
-    public RespMsg<Integer> saveUser(WxUser user) {
+    @RequestMapping("registerUser")
+    public RespMsg<Map> registerUser(String code, String userinfo) {
 
         try {
-            int count = wxUserService.saveUser(user);
-            if (count == 1) {
-                return success("保存成功");
+            WxUser user = null;
+            if (!StringUtils.isEmpty(userinfo)) {
+                user = JSON.parseObject(userinfo, WxUser.class);
+                user.setToken(code);
+            }
+            int uid = wxUserService.saveUser(user);
+            if (uid != 0) {
+                Map map = new HashMap();
+                map.put("token", code);
+                map.put("uid", uid);
+
+                return success("注册成功", map);
             } else {
-                return fail("保存失败");
+                return fail("注册失败");
             }
         } catch (Exception e) {
-            log.error("保存异常", e);
-            return fail("保存异常");
+            log.error("注册异常", e);
+            return fail("注册异常");
         }
 
     }
 
+    @RequestMapping("checkToken")
+    public RespMsg<String> checkToken(String uid, String token) {
 
+        if(StringUtils.isEmpty(uid) || StringUtils.isEmpty(token)){
+            return  fail("未登录");
+        }
+        WxUser user =  wxUserService.checkLogin(uid);
+        if (user != null){
+            return success("已登录");
+        }else{
+            return fail("未登录");
+        }
+
+    }
 
 
 }

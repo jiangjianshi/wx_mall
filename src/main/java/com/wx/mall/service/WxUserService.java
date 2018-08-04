@@ -8,4 +8,6 @@ import com.wx.mall.entity.model.WxUser;
 public interface WxUserService {
 
     int saveUser(WxUser user);
+
+    WxUser checkLogin(String uid);
 }
