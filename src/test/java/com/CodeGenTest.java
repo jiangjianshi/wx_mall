@@ -23,7 +23,7 @@ public class CodeGenTest {
             Connection conn = DriverManager.getConnection(url, user, password);
             if (!conn.isClosed()) {
                 Statement statement = conn.createStatement();
-                String sql = "select COLUMN_NAME,COLUMN_COMMENT ,DATA_TYPE from information_schema.COLUMNS where table_name = 'wx_user'";
+                String sql = "select COLUMN_NAME,COLUMN_COMMENT ,DATA_TYPE from information_schema.COLUMNS where table_name = 'address'";
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
                     String columnComment = rs.getString("COLUMN_COMMENT");
@@ -34,10 +34,10 @@ public class CodeGenTest {
 
 //					 System.out.println("<result property=\""+camelColumn+ "\" column=\""+columnName+"\"/>");
 
-					System.out.println("" + columnName+",");
+//					System.out.println("" + columnName+",");
 //					System.out.println(getEntity(camelColumn, columnComment, dataType));
 
-//                    System.out.println("<if test=\"vo." + camelColumn + " != null\"> a." + columnName + " = #{vo." + camelColumn + "},</if>");
+                    System.out.println("<if test=\"vo." + camelColumn + " != null\"> a." + columnName + " = #{vo." + camelColumn + "},</if>");
                 }
             }
         } catch (Exception e) {
