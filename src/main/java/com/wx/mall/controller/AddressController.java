@@ -67,11 +67,21 @@ public class AddressController extends BaseController {
     @RequestMapping("setDefault")
     public RespMsg<Integer> setDefault(Integer uid, Integer id) {
         int cnt = addressService.setDefault(uid, id);
-        if(cnt == 1){
+        if (cnt == 1) {
             return success("设置成功", cnt);
 
-        }else {
+        } else {
             return fail("设置默认失败");
+        }
+    }
+
+    @RequestMapping("getDefaultAddress")
+    public RespMsg<Address> getDefaultAddress(Integer uid) {
+        Address ads = addressService.getDefaultAddress(uid);
+        if (ads != null) {
+            return success("获取成功", ads);
+        } else {
+            return fail("获取失败");
         }
     }
 }

@@ -18,4 +18,6 @@ public interface AddressService {
     int deleteAddress(Integer addressId);
 
     int setDefault(Integer uid, Integer addressId);
+
+    Address getDefaultAddress(Integer uid);
 }

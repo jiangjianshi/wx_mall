@@ -39,6 +39,6 @@ public class Consts {
     
     
     public static final Integer NOTFOUND = 11111;
-	public static final String UNKNOWN = "unknown";
+	public static final String UNKNOWN = "未知类型";
 
 }

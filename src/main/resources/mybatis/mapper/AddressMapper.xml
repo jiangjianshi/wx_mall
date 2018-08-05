@@ -51,6 +51,13 @@
         where a.uid = #{uid} and a.status = 1
     </select>
 
+    <select id="selectDefaultAddress" resultMap="beanMap">
+        select
+        <include refid="columns"/>
+        from address a
+        where a.uid = #{uid} and a.status = 1 and a.is_default = 1 order by a.create_time desc limit 1
+    </select>
+
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="vo.id" parameterType="com.wx.mall.entity.model.Address">
         insert into address

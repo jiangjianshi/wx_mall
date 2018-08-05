@@ -63,4 +63,9 @@ public class AddressServiceImpl implements AddressService {
        int cnt =  addressMapper.updateSelective(ads);
         return cnt;
     }
+
+    @Override
+    public Address getDefaultAddress(Integer uid) {
+        return addressMapper.selectDefaultAddress(uid);
+    }
 }

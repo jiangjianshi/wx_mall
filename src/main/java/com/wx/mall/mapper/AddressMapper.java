@@ -13,14 +13,16 @@ import java.util.List;
 @Repository
 public interface AddressMapper {
 
-   Address selectByPrimaryKey(Integer id);
+    Address selectByPrimaryKey(Integer id);
 
-   List<Address> selectByUid(Integer uid);
+    List<Address> selectByUid(Integer uid);
 
-   int insert(@Param("vo") Address vo);
+    int insert(@Param("vo") Address vo);
 
-   int updateSelective(@Param("vo") Address vo);
+    int updateSelective(@Param("vo") Address vo);
 
-   int updateDefaultByUid(@Param("isDefault") Integer isDefault, @Param("uid") Integer uid);
+    int updateDefaultByUid(@Param("isDefault") Integer isDefault, @Param("uid") Integer uid);
+
+    Address selectDefaultAddress(@Param("uid") Integer uid);
 
 }

@@ -1,0 +1,16 @@
+package com.wx.mall.service;
+
+import com.wx.mall.entity.model.Orders;
+
+import java.util.List;
+
+/**
+ * Created by jiangjianshi on 18/8/5.
+ */
+public interface OrdersService {
+
+
+    List<Orders> listOrders(Integer uid, Integer status);
+
+    int closeOrder(Integer orderId);
+}
