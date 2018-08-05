@@ -42,7 +42,11 @@
         select
         <include refid="columns"/>
         from Orders a
-        where a.uid = #{uid} and a.status = #{status}
+        where a.uid = #{uid}
+        <if test="status != null">
+            and a.status = #{status}
+        </if>
+
     </select>
 
 
