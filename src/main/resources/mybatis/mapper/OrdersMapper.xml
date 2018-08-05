@@ -34,14 +34,14 @@
     <select id="selectByPrimaryKey" resultMap="beanMap">
         select
         <include refid="columns"/>
-        from Orders a
+        from orders a
         where a.id = #{id}
     </select>
 
     <select id="selectByUidAndStatus" resultMap="beanMap">
         select
         <include refid="columns"/>
-        from Orders a
+        from orders a
         where a.uid = #{uid}
         <if test="status != null">
             and a.status = #{status}
@@ -52,7 +52,7 @@
 
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="vo.id" parameterType="com.wx.mall.entity.model.Orders">
-        insert into Orders
+        insert into orders
            ( <include refid="columns"/> )
         values
             (#{vo.id},#{vo.orderCode},#{vo.uid},#{vo.realAmount},#{vo.useScore},#{vo.gainScore},
@@ -62,7 +62,7 @@
 
     <!-- 选择更新 -->
     <update id="updateSelective" parameterType="com.wx.mall.entity.model.Orders">
-        UPDATE Orders a
+        UPDATE orders a
         <trim prefix="set" suffixOverrides=",">
             <if test="vo.orderCode != null"> a.order_dode = #{vo.orderCode},</if>
             <if test="vo.uid != null"> a.uid = #{vo.uid},</if>
