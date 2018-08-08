@@ -17,13 +17,13 @@ public class CodeGenTest {
         String driver = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/wx_mall?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8";
         String user = "root";
-        String password = "root";
+        String password = "123456";
         try {
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, user, password);
             if (!conn.isClosed()) {
                 Statement statement = conn.createStatement();
-                String sql = "select COLUMN_NAME,COLUMN_COMMENT ,DATA_TYPE from information_schema.COLUMNS where table_name = 'goods_properties'";
+                String sql = "select COLUMN_NAME,COLUMN_COMMENT ,DATA_TYPE from information_schema.COLUMNS where table_name = 'goods'";
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
                     String columnComment = rs.getString("COLUMN_COMMENT");
