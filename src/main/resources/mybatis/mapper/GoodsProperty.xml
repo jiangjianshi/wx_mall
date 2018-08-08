@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wx.mall.mapper.GoodsPropertiesMapper">
+<mapper namespace="com.wx.mall.mapper.GoodsPropertyMapper">
 
 
     <sql id="columns">
@@ -15,7 +15,7 @@
 	</sql>
 
     <!--查询结果集 -->
-    <resultMap id="beanMap" type="com.wx.mall.entity.model.GoodsProperties">
+    <resultMap id="beanMap" type="com.wx.mall.entity.model.GoodsProperty">
         <result property="id" column="id"/>
         <result property="goodsId" column="goods_id"/>
         <result property="propTypeId" column="prop_type_id"/>
@@ -42,7 +42,7 @@
 
 
     <!-- 选择更新 -->
-    <update id="updateSelective" parameterType="com.wx.mall.entity.model.GoodsProperties">
+    <update id="updateSelective" parameterType="com.wx.mall.entity.model.GoodsProperty">
         UPDATE goods_properties a
         <trim prefix="set" suffixOverrides=",">
             <if test="vo.goodsId != null"> a.goods_id = #{vo.goodsId},</if>

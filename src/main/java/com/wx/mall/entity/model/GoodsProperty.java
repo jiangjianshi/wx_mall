@@ -10,7 +10,7 @@ import java.util.Date;
  */
 @Data
 @ToString
-public class GoodsProperties {
+public class GoodsProperty {
 
     private Integer id; //
     private Integer goodsId; //商品ID
