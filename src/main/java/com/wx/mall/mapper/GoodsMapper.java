@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface GoodsMapper {
 
+    Goods selectByPrimaryKey(@Param("id") Integer id);
 
     List<GoodsDto> selectByCategoryAndName(@Param("categoryId") Integer categoryId, @Param("name") String name);
 }

@@ -1,5 +1,6 @@
 package com.wx.mall.service;
 
+import com.wx.mall.entity.dto.GoodsDetailDto;
 import com.wx.mall.entity.dto.GoodsDto;
 import com.wx.mall.entity.model.Banner;
 import com.wx.mall.entity.model.Goods;
@@ -17,4 +18,6 @@ public interface GoodsService {
     List<Banner> listBanner();
 
     List<GoodsDto> listGoods(Integer catId, String name);
+
+    GoodsDetailDto getGoodsDetail(Integer goodsId);
 }

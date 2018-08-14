@@ -34,10 +34,10 @@
         where a.id = #{id}
     </select>
 
-    <select id="selectAll" resultMap="beanMap">
+    <select id="selectByGoodsId" resultMap="beanMap">
         select
         <include refid="columns"/>
-        from goods_properties a where status = 1
+        from goods_properties a where 1=1 and goods_id = #{goodsId}
     </select>
 
 

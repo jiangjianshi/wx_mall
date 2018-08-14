@@ -45,10 +45,9 @@
     <update id="updateSelective" parameterType="com.wx.mall.entity.model.Banner">
         UPDATE banner a
         <trim prefix="set" suffixOverrides=",">
-            <if test="vo.backgroundImgUrl != null"> a.background_img_url = #{vo.backgroundImgUrl},</if>
-            <if test="vo.jumpUrl != null"> a.jump_url = #{vo.jumpUrl},</if>
-            <if test="vo.title != null"> a.title = #{vo.title},</if>
-            <if test="vo.sortNo != null"> a.sort_no = #{vo.sortNo},</if>
+            <if test="vo.goodsId != null"> a.goods_id = #{vo.goodsId},</if>
+            <if test="vo.picUrl != null"> a.pic_url = #{vo.picUrl},</if>
+            <if test="vo.isDefault != null"> a.is_default = #{vo.isDefault},</if>
             <if test="vo.status != null"> a.status = #{vo.status},</if>
             <if test="vo.updateTime != null"> a.update_time = now()</if>
         </trim>

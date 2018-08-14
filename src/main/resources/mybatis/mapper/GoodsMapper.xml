@@ -12,6 +12,10 @@
         original_price,
         brand,
         market_time,
+        share_bonus,
+        share_bonus_type,
+        buy_count,
+        good_comment_count,
         goods_desc,
         status,
         create_time,
@@ -28,6 +32,10 @@
         <result property="originalPrice" column="original_price"/>
         <result property="brand" column="brand"/>
         <result property="marketTime" column="market_time"/>
+        <result property="shareBonus" column="share_bonus"/>
+        <result property="shareBonusType" column="share_bonus_type"/>
+        <result property="buyCount" column="buy_count"/>
+        <result property="goodCommentCount" column="good_comment_count"/>
         <result property="goodsDesc" column="goods_desc"/>
         <result property="status" column="status"/>
         <result property="createTime" column="create_time"/>
@@ -87,6 +95,10 @@
             <if test="vo.originalPrice != null"> a.original_price = #{vo.originalPrice},</if>
             <if test="vo.brand != null"> a.brand = #{vo.brand},</if>
             <if test="vo.marketTime != null"> a.market_time = #{vo.marketTime},</if>
+            <if test="vo.shareBonus != null"> a.share_bonus = #{vo.shareBonus},</if>
+            <if test="vo.shareBonusType != null"> a.share_bonus_type = #{vo.shareBonusType},</if>
+            <if test="vo.buyCount != null"> a.buy_count = #{vo.buyCount},</if>
+            <if test="vo.goodCommentCount != null"> a.good_comment_count = #{vo.goodCommentCount},</if>
             <if test="vo.goodsDesc != null"> a.goods_desc = #{vo.goodsDesc},</if>
             <if test="vo.status != null"> a.status = #{vo.status},</if>
             <if test="vo.updateTime != null"> a.update_time = now()</if>
