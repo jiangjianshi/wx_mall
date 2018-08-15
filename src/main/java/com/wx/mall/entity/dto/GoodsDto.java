@@ -12,4 +12,5 @@ import lombok.ToString;
 public class GoodsDto extends Goods {
 
     private String picUrl;
+    private int minScore;
 }

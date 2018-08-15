@@ -7,6 +7,7 @@ import com.wx.mall.entity.dto.PropertiesDto;
 import com.wx.mall.entity.model.*;
 import com.wx.mall.mapper.*;
 import com.wx.mall.service.GoodsService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,9 +72,9 @@ public class GoodsServiceImpl implements GoodsService {
         for (Integer type : groupMap.keySet()) {
             PropertiesDto dto = new PropertiesDto();
             dto.setTypeId(type);
-            if(type == 1){
+            if (type == 1) {
                 dto.setTypeName("颜色");
-            }else {
+            } else {
                 dto.setTypeName("尺寸");
             }
             dto.setChildsCurGoods(groupMap.get(type));
@@ -81,7 +82,15 @@ public class GoodsServiceImpl implements GoodsService {
         }
 
         GoodsDetailDto detailDto = new GoodsDetailDto();
-        detailDto.setBasicInfo(baseInfo);
+
+        GoodsDto dto = new GoodsDto();
+        BeanUtils.copyProperties(baseInfo, dto);
+        for (GoodsPics pic : pics) {
+            if(pic.getIsDefault() == 1){
+                dto.setPicUrl(pic.getPicUrl());
+            }
+        }
+        detailDto.setBasicInfo(dto);
         detailDto.setPics(pics);
         detailDto.setProperties(properties);
         return detailDto;
