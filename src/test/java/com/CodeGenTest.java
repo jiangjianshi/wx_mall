@@ -32,9 +32,9 @@ public class CodeGenTest {
                     String columnName = rs.getString("COLUMN_NAME");
                     String camelColumn = underlineToCamel(columnName);
 
-                    System.out.println(getEntity(camelColumn, columnComment, dataType));
+//                    System.out.println(getEntity(camelColumn, columnComment, dataType));
 //                    System.out.println("" + columnName+",");
-//					  System.out.println("<result property=\""+camelColumn+ "\" column=\""+columnName+"\"/>");
+					  System.out.println("<result property=\""+camelColumn+ "\" column=\""+columnName+"\"/>");
 //                    System.out.println("<if test=\"vo." + camelColumn + " != null\"> a." + columnName + " = #{vo." + camelColumn + "},</if>");
                 }
             }

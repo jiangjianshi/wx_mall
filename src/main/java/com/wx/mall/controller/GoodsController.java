@@ -3,6 +3,7 @@ package com.wx.mall.controller;
 import com.wx.mall.common.RespMsg;
 import com.wx.mall.entity.dto.GoodsDetailDto;
 import com.wx.mall.entity.dto.GoodsDto;
+import com.wx.mall.entity.dto.PriceDto;
 import com.wx.mall.entity.model.Banner;
 import com.wx.mall.entity.model.Goods;
 import com.wx.mall.entity.model.GoodsCategory;
@@ -58,5 +59,16 @@ public class GoodsController extends BaseController {
         }
     }
 
+    @RequestMapping("calSelectedPrice")
+    public RespMsg<PriceDto> calSelectedPrice(Integer goodsId, String propertyChildIds) {
+
+        try {
+            PriceDto PriceDto = goodsService.calSelectedPrice(goodsId, propertyChildIds);
+            return success("获取成功", PriceDto);
+        } catch (Exception e) {
+            log.error("获取失败.", e);
+            return fail("获取失败.");
+        }
+    }
 
 }

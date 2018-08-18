@@ -13,8 +13,7 @@ import java.util.Date;
 public class GoodsPropertyType {
 
     private Integer id; //
-    private Integer typeId; //
-    private String typeName; //名称
+    private String name; //名称
     private Date createTime; //
     private Date updateTime; //
 }

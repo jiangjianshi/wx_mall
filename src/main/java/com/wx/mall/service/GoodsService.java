@@ -2,6 +2,7 @@ package com.wx.mall.service;
 
 import com.wx.mall.entity.dto.GoodsDetailDto;
 import com.wx.mall.entity.dto.GoodsDto;
+import com.wx.mall.entity.dto.PriceDto;
 import com.wx.mall.entity.model.Banner;
 import com.wx.mall.entity.model.Goods;
 import com.wx.mall.entity.model.GoodsCategory;
@@ -20,4 +21,6 @@ public interface GoodsService {
     List<GoodsDto> listGoods(Integer catId, String name);
 
     GoodsDetailDto getGoodsDetail(Integer goodsId);
+
+    PriceDto calSelectedPrice(Integer goodsId, String propertyChildIds);
 }
