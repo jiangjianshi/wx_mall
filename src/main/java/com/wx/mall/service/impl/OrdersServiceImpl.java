@@ -1,6 +1,9 @@
 package com.wx.mall.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.wx.mall.entity.dto.OrderDto;
 import com.wx.mall.entity.dto.OrderStatusCount;
+import com.wx.mall.entity.dto.UserOrderDto;
 import com.wx.mall.entity.model.Orders;
 import com.wx.mall.mapper.OrdersMapper;
 import com.wx.mall.service.OrdersService;
@@ -54,4 +57,24 @@ public class OrdersServiceImpl implements OrdersService {
 
         return statusCount;
     }
+
+    @Override
+    public OrderDto calOrder(Integer uid, String goodsJsonStr, String remark) {
+
+        OrderDto dto = new OrderDto();
+        dto.setAmountLogistics(10);
+        dto.setAmountTotle(100);
+        dto.setIsNeedLogistics(1);
+        dto.setScore(12);
+        return dto;
+    }
+
+
+    @Override
+    public OrderDto createOrder(Integer uid, String goodsJsonStr, String remark) {
+
+        List<UserOrderDto> orders = JSON.parseArray(goodsJsonStr, UserOrderDto.class);
+        return null;
+    }
+
 }

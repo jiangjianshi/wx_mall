@@ -3,6 +3,7 @@ package com.wx.mall.controller;
 import com.wx.mall.common.RespMsg;
 import com.wx.mall.entity.model.Address;
 import com.wx.mall.service.AddressService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by jiangjianshi on 18/8/4.
  */
-
+@Slf4j
 @RestController
 @RequestMapping("/address/")
 public class AddressController extends BaseController {
@@ -77,11 +78,13 @@ public class AddressController extends BaseController {
 
     @RequestMapping("getDefaultAddress")
     public RespMsg<Address> getDefaultAddress(Integer uid) {
-        Address ads = addressService.getDefaultAddress(uid);
-        if (ads != null) {
+        try {
+            Address ads = addressService.getDefaultAddress(uid);
             return success("获取成功", ads);
-        } else {
-            return fail("获取失败");
+        } catch (Exception e) {
+            log.error("获取默认地址失败", e);
+            return fail("获取默认地址失败");
         }
+
     }
 }

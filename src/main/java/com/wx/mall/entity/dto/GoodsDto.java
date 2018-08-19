@@ -13,4 +13,6 @@ public class GoodsDto extends Goods {
 
     private String picUrl;
     private int minScore;
+    private int logisticsId = 1;
+
 }

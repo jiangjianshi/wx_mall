@@ -17,4 +17,13 @@ public class GoodsDetailDto {
     List<PropertiesDto> properties;
     private String content;
     private GoodsDto basicInfo;
+    private Logistics logistics = new Logistics();
+
+
+    @Data
+    private  class Logistics{
+        private int id;
+    }
+
+
 }
