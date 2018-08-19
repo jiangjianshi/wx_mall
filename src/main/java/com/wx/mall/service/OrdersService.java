@@ -3,8 +3,7 @@ package com.wx.mall.service;
 import com.wx.mall.entity.dto.OrderDto;
 import com.wx.mall.entity.dto.OrderStatusCount;
 import com.wx.mall.entity.model.Orders;
-
-import java.util.List;
+import com.wx.mall.entity.vo.OrderListVo;
 
 /**
  * Created by jiangjianshi on 18/8/5.
@@ -12,7 +11,7 @@ import java.util.List;
 public interface OrdersService {
 
 
-    List<Orders> listOrders(Integer uid, Integer status);
+    OrderListVo listOrders(Integer uid, Integer status);
 
     int closeOrder(Integer orderId);
 

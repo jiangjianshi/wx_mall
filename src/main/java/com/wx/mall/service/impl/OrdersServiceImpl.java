@@ -1,11 +1,13 @@
 package com.wx.mall.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.wx.mall.entity.dto.GoodsDto;
 import com.wx.mall.entity.dto.OrderDto;
 import com.wx.mall.entity.dto.OrderStatusCount;
 import com.wx.mall.entity.dto.UserOrderDto;
 import com.wx.mall.entity.model.OrderGoodsRelation;
 import com.wx.mall.entity.model.Orders;
+import com.wx.mall.entity.vo.OrderListVo;
 import com.wx.mall.mapper.OrderGoodsRelationMapper;
 import com.wx.mall.mapper.OrdersMapper;
 import com.wx.mall.service.OrdersService;
@@ -16,10 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -37,9 +36,18 @@ public class OrdersServiceImpl implements OrdersService {
 
 
     @Override
-    public List<Orders> listOrders(Integer uid, Integer status) {
+    public OrderListVo listOrders(Integer uid, Integer status) {
 
-        return ordersMapper.selectByUidAndStatus(uid, status);
+        OrderListVo vo = new OrderListVo();
+        List<Orders> orders = ordersMapper.selectByUidAndStatus(uid, status);
+
+        List<Integer> ids = orders.stream().map(x -> x.getId()).collect(Collectors.toList());
+        List<GoodsDto> gsDto = orderGoodsRelationMapper.selectGoodsByOrderIds(ids);
+        Map<Integer, List<GoodsDto>> map = gsDto.stream().collect(Collectors.groupingBy(x -> x.getOrderId()));
+
+        vo.setOrders(orders);
+        vo.setGoodsMap(map);
+        return vo;
     }
 
     @Override
@@ -95,7 +103,7 @@ public class OrdersServiceImpl implements OrdersService {
         int cnt = ordersMapper.insert(order);
 
         List<UserOrderDto> orders = JSON.parseArray(goodsJsonStr, UserOrderDto.class);
-        for(UserOrderDto orderDto : orders){
+        for (UserOrderDto orderDto : orders) {
 
             OrderGoodsRelation odr = new OrderGoodsRelation();
             odr.setGoodsId(orderDto.getGoodsId());

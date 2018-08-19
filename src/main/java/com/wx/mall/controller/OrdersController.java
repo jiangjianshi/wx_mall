@@ -4,13 +4,12 @@ import com.wx.mall.common.RespMsg;
 import com.wx.mall.entity.dto.OrderDto;
 import com.wx.mall.entity.dto.OrderStatusCount;
 import com.wx.mall.entity.model.Orders;
+import com.wx.mall.entity.vo.OrderListVo;
 import com.wx.mall.service.OrdersService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * Created by jiangjianshi on 18/8/5.
@@ -25,9 +24,9 @@ public class OrdersController extends BaseController {
 
 
     @RequestMapping("listOrders")
-    public RespMsg<List<Orders>> listOrders(Integer uid, Integer status) {
-        List<Orders> list = ordersService.listOrders(uid, status);
-        return success("获取成功", list);
+    public RespMsg<OrderListVo> listOrders(Integer uid, Integer status) {
+        OrderListVo orderListVo = ordersService.listOrders(uid, status);
+        return success("获取成功", orderListVo);
     }
 
 
