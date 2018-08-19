@@ -25,6 +25,7 @@ public class Orders {
     private String remark; //评论
     private Integer status; //订单状态：0：待付款， 1代发货，2待收货，3 待评价，4 已完成 ， -1 已取消
     private String statusStr;
+    private int logisticsFee;
 
     @JsonFormat(pattern = "yyyy-MM-dd H:mm:ss", timezone = "GMT+8")
     private Date createTime; //订单创建时间

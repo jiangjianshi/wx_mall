@@ -3,6 +3,7 @@ package com.wx.mall.service;
 import com.wx.mall.entity.dto.OrderDto;
 import com.wx.mall.entity.dto.OrderStatusCount;
 import com.wx.mall.entity.model.Orders;
+import com.wx.mall.entity.vo.OrderDetailVo;
 import com.wx.mall.entity.vo.OrderListVo;
 
 /**
@@ -21,5 +22,7 @@ public interface OrdersService {
 
     Orders createOrder(Integer uid, String goodsJsonStr, String remark, Integer addressId);
 
+    OrderDetailVo getOrderDetail(Integer orderId);
 
+    int confirmOrder(Integer orderId);
 }

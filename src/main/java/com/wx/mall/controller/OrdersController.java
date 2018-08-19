@@ -4,6 +4,7 @@ import com.wx.mall.common.RespMsg;
 import com.wx.mall.entity.dto.OrderDto;
 import com.wx.mall.entity.dto.OrderStatusCount;
 import com.wx.mall.entity.model.Orders;
+import com.wx.mall.entity.vo.OrderDetailVo;
 import com.wx.mall.entity.vo.OrderListVo;
 import com.wx.mall.service.OrdersService;
 import lombok.extern.slf4j.Slf4j;
@@ -60,12 +61,34 @@ public class OrdersController extends BaseController {
                 return success("下单成功", order);
             }
 
-
         } catch (Exception e) {
             log.error("下单失败", e);
             return fail("下单失败");
         }
     }
 
+    @RequestMapping("orderDetail")
+    public RespMsg<OrderDetailVo> orderDetail(Integer orderId) {
+
+        try {
+            OrderDetailVo detailVo = ordersService.getOrderDetail(orderId);
+            return success("获取成功", detailVo);
+        } catch (Exception e) {
+            log.error("获取订单详情失败", e);
+            return fail("获取订单详情失败");
+        }
+    }
+
+    @RequestMapping("confirmOrder")
+    public RespMsg<Integer> confirmOrder(Integer orderId) {
+
+        try {
+            int cnt =  ordersService.confirmOrder(orderId);
+            return success("获取成功", cnt);
+        } catch (Exception e) {
+            log.error("确认收货失败", e);
+            return fail("确认收货失败");
+        }
+    }
 
 }

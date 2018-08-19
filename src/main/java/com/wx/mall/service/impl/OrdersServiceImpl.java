@@ -1,24 +1,29 @@
 package com.wx.mall.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.wx.mall.entity.dto.GoodsDto;
 import com.wx.mall.entity.dto.OrderDto;
 import com.wx.mall.entity.dto.OrderStatusCount;
 import com.wx.mall.entity.dto.UserOrderDto;
 import com.wx.mall.entity.model.OrderGoodsRelation;
 import com.wx.mall.entity.model.Orders;
+import com.wx.mall.entity.vo.OrderDetailVo;
 import com.wx.mall.entity.vo.OrderListVo;
+import com.wx.mall.enums.OrderTypeEnum;
 import com.wx.mall.mapper.OrderGoodsRelationMapper;
 import com.wx.mall.mapper.OrdersMapper;
 import com.wx.mall.service.OrdersService;
 import com.wx.mall.util.DateUtil;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -117,6 +122,27 @@ public class OrdersServiceImpl implements OrdersService {
         }
 
         return order;
+    }
+
+
+    @Override
+    public OrderDetailVo getOrderDetail(Integer orderId) {
+        Orders orderInfo = ordersMapper.selectByPrimaryKey(orderId);
+        List<GoodsDto> gsDto = orderGoodsRelationMapper.selectGoodsByOrderIds(Lists.newArrayList(orderId));
+
+        OrderDetailVo detailVo = new OrderDetailVo();
+        detailVo.setOrderInfo(orderInfo);
+        detailVo.setGoods(gsDto);
+        return detailVo;
+    }
+
+    @Override
+    public int confirmOrder(Integer orderId) {
+
+        Orders orders = new Orders();
+        orders.setId(orderId);
+        orders.setStatus(OrderTypeEnum.DONE.getCode());
+        return ordersMapper.updateSelective(orders);
     }
 
 }

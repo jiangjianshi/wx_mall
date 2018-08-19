@@ -19,6 +19,7 @@ public class OrderGoodsRelation {
     private Integer goodsId; //
     private Integer number; //购买数量
     private String goodsProperties; //商品属性
+    private String label; //商品标签
     private Integer logisticsType; //
     private Integer inviterId; //分享人ID
     private Integer status; //状态： 1 有效，0 无效

@@ -1,6 +1,7 @@
 package com.wx.mall.entity.dto;
 
 import com.wx.mall.entity.model.GoodsPics;
+import com.wx.mall.entity.model.Logistics;
 import lombok.Data;
 import lombok.ToString;
 
@@ -18,12 +19,5 @@ public class GoodsDetailDto {
     private String content;
     private GoodsDto basicInfo;
     private Logistics logistics = new Logistics();
-
-
-    @Data
-    private  class Logistics{
-        private int id;
-    }
-
 
 }

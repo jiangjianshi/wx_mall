@@ -9,6 +9,7 @@
         goods_id,
         number,
         goods_properties,
+        label,
         logisticsType,
         inviter_id,
         status,
@@ -23,6 +24,7 @@
         <result property="goodsId" column="goods_id"/>
         <result property="number" column="number"/>
         <result property="goodsProperties" column="goods_properties"/>
+        <result property="label" column="label"/>
         <result property="logisticsType" column="logisticsType"/>
         <result property="inviterId" column="inviter_id"/>
         <result property="status" column="status"/>
@@ -49,6 +51,7 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
 
+        <result property="number" column="number"/>
         <result property="orderId" column="order_id"/>
         <result property="picUrl" column="pic_url"/>
     </resultMap>
@@ -63,7 +66,7 @@
 
     <select id="selectGoodsByOrderIds" resultMap="beanMap_order">
         SELECT
-            r.order_id,
+            r.order_id, r.number,
             g.*,
             p.pic_url
         FROM

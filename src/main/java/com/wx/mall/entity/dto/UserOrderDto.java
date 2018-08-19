@@ -14,6 +14,7 @@ public class UserOrderDto {
     private Integer goodsId;
     private Integer number;
     private String propertyChildIds;
+    private String label;
     private Integer logisticsType;
     private Integer inviter_id;
 }

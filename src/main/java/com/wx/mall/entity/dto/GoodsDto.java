@@ -15,4 +15,5 @@ public class GoodsDto extends Goods {
     private int minScore;
     private int logisticsId = 1;
     private Integer orderId;
+    private Integer number;
 }
