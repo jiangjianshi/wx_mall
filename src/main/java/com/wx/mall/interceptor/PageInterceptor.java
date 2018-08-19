@@ -1,11 +1,4 @@
-/** 
- * Project Name: fileservice_project 
- * File Name: FileInterceptor.java 
- * Package Name: com.huifenqi.file 
- * Date: 2015年12月30日下午2:13:24 
- * Copyright (c) 2015, www.huizhaofang.com All Rights Reserved. 
- * 
- */
+
 package com.wx.mall.interceptor;
 
 import com.github.pagehelper.PageHelper;

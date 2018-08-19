@@ -18,6 +18,7 @@ public class Orders {
     private Integer id; //
     private String orderCode; // 订单编号
     private Integer uid; //用户id
+    private Integer addressId; //地址id
     private BigDecimal realAmount; //订单真是价格
     private Integer useScore; //使用积分
     private Integer gainScore; //获得积分

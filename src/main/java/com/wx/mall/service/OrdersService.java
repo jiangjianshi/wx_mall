@@ -20,7 +20,7 @@ public interface OrdersService {
 
     OrderDto calOrder(Integer uid, String goodsJsonStr, String remark);
 
-    OrderDto createOrder(Integer uid, String goodsJsonStr, String remark);
+    Orders createOrder(Integer uid, String goodsJsonStr, String remark, Integer addressId);
 
 
 }

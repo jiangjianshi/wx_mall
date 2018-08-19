@@ -4,15 +4,22 @@ import com.alibaba.fastjson.JSON;
 import com.wx.mall.entity.dto.OrderDto;
 import com.wx.mall.entity.dto.OrderStatusCount;
 import com.wx.mall.entity.dto.UserOrderDto;
+import com.wx.mall.entity.model.OrderGoodsRelation;
 import com.wx.mall.entity.model.Orders;
+import com.wx.mall.mapper.OrderGoodsRelationMapper;
 import com.wx.mall.mapper.OrdersMapper;
 import com.wx.mall.service.OrdersService;
+import com.wx.mall.util.DateUtil;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +31,9 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Autowired
     private OrdersMapper ordersMapper;
+
+    @Autowired
+    private OrderGoodsRelationMapper orderGoodsRelationMapper;
 
 
     @Override
@@ -62,7 +72,7 @@ public class OrdersServiceImpl implements OrdersService {
     public OrderDto calOrder(Integer uid, String goodsJsonStr, String remark) {
 
         OrderDto dto = new OrderDto();
-        dto.setAmountLogistics(10);
+        dto.setAmountLogistics(12);
         dto.setAmountTotle(100);
         dto.setIsNeedLogistics(1);
         dto.setScore(12);
@@ -71,10 +81,34 @@ public class OrdersServiceImpl implements OrdersService {
 
 
     @Override
-    public OrderDto createOrder(Integer uid, String goodsJsonStr, String remark) {
+    public Orders createOrder(Integer uid, String goodsJsonStr, String remark, Integer addressId) {
+
+        Orders order = new Orders();
+        order.setUid(uid);
+        order.setAddressId(addressId);
+        order.setOrderCode(DateUtil.formatDateTime(new Date()) + new Random().nextInt(10000));
+        order.setRealAmount(new BigDecimal("99"));
+        order.setStatus(0);
+        order.setRemark(remark);
+        order.setCreateTime(new Date());
+        order.setUpdateTime(new Date());
+        int cnt = ordersMapper.insert(order);
 
         List<UserOrderDto> orders = JSON.parseArray(goodsJsonStr, UserOrderDto.class);
-        return null;
+        for(UserOrderDto orderDto : orders){
+
+            OrderGoodsRelation odr = new OrderGoodsRelation();
+            odr.setGoodsId(orderDto.getGoodsId());
+            odr.setOrderId(order.getId());
+            odr.setNumber(orderDto.getNumber());
+            odr.setGoodsProperties(orderDto.getPropertyChildIds());
+            odr.setLogisticsType(orderDto.getLogisticsType());
+            odr.setInviterId(orderDto.getInviter_id());
+            odr.setStatus(1);
+            orderGoodsRelationMapper.insert(odr);
+        }
+
+        return order;
     }
 
 }

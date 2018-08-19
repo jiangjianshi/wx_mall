@@ -50,15 +50,15 @@ public class OrdersController extends BaseController {
 
 
     @RequestMapping("createOrder")
-    public RespMsg<OrderDto> createOrder(Integer uid, String goodsJsonStr, String remark, String calculate) {
+    public RespMsg<Object> createOrder(Integer uid, String goodsJsonStr, String remark, String calculate, Integer addressId) {
 
         try {
-            if ("calculate".equals(calculate)) {
+            if ("true".equals(calculate)) {
                 OrderDto dto = ordersService.calOrder(uid, goodsJsonStr, remark);
                 return success("下单成功", dto);
             } else {
-                OrderDto dto = ordersService.createOrder(uid, goodsJsonStr, remark);
-                return success("下单成功", dto);
+                Orders order = ordersService.createOrder(uid, goodsJsonStr, remark, addressId);
+                return success("下单成功", order);
             }
 
 

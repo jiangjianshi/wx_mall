@@ -7,6 +7,7 @@
 		id,
 		order_code,
         uid,
+        address_id,
         real_amount,
         use_score,
         gain_score,
@@ -21,6 +22,7 @@
         <result property="id" column="id"/>
         <result property="orderCode" column="order_code"/>
         <result property="uid" column="uid"/>
+        <result property="addressId" column="address_id"/>
         <result property="realAmount" column="real_amount"/>
         <result property="useScore" column="use_score"/>
         <result property="gainScore" column="gain_score"/>
@@ -55,7 +57,7 @@
         insert into orders
            ( <include refid="columns"/> )
         values
-            (#{vo.id},#{vo.orderCode},#{vo.uid},#{vo.realAmount},#{vo.useScore},#{vo.gainScore},
+            (#{vo.id},#{vo.orderCode},#{vo.uid}, #{vo.addressId}, #{vo.realAmount},#{vo.useScore},#{vo.gainScore},
             #{vo.remark},#{vo.status} , now(), now());
     </insert>
 
@@ -66,6 +68,7 @@
         <trim prefix="set" suffixOverrides=",">
             <if test="vo.orderCode != null"> a.order_dode = #{vo.orderCode},</if>
             <if test="vo.uid != null"> a.uid = #{vo.uid},</if>
+            <if test="vo.addressId != null"> a.address_id = #{vo.addressId},</if>
             <if test="vo.realAmount != null"> a.real_amount = #{vo.realAmount},</if>
             <if test="vo.useScore != null"> a.use_score = #{vo.useScore},</if>
             <if test="vo.gainScore != null"> a.gain_score = #{vo.gainScore},</if>
