@@ -54,6 +54,7 @@
         <result property="number" column="number"/>
         <result property="orderId" column="order_id"/>
         <result property="picUrl" column="pic_url"/>
+        <result property="label" column="label"/>
     </resultMap>
 
 
@@ -66,7 +67,7 @@
 
     <select id="selectGoodsByOrderIds" resultMap="beanMap_order">
         SELECT
-            r.order_id, r.number,
+            r.order_id, r.number,r.label,
             g.*,
             p.pic_url
         FROM
@@ -74,11 +75,14 @@
             goods g on r.goods_id = g.id join goods_pics p on r.goods_id = p.goods_id
         WHERE
             p.is_default = 1
+        <if test="idsList.size > 0">
             AND r.order_id IN
             <foreach collection="idsList" item="id" index="index"
                      open="(" close=")" separator=",">
                 #{id}
             </foreach>
+        </if>
+
     </select>
 
 
@@ -86,7 +90,7 @@
         insert into order_goods_relation
         ( <include refid="columns"/> )
         values
-        (#{vo.id},#{vo.orderId},#{vo.goodsId}, #{vo.number}, #{vo.goodsProperties},#{vo.logisticsType},#{vo.inviterId},
+        (#{vo.id},#{vo.orderId},#{vo.goodsId}, #{vo.number}, #{vo.goodsProperties}, #{vo.label}, #{vo.logisticsType},#{vo.inviterId},
         #{vo.status} , now(), now());
     </insert>
 

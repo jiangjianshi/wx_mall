@@ -115,6 +115,7 @@ public class OrdersServiceImpl implements OrdersService {
             odr.setOrderId(order.getId());
             odr.setNumber(orderDto.getNumber());
             odr.setGoodsProperties(orderDto.getPropertyChildIds());
+            odr.setLabel(orderDto.getLabel().trim());
             odr.setLogisticsType(orderDto.getLogisticsType());
             odr.setInviterId(orderDto.getInviter_id());
             odr.setStatus(1);
