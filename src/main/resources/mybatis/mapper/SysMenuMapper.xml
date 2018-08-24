@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hfq.house.manager.mapper.SysMenuMapper">
+<mapper namespace="com.wx.mall.mapper.SysMenuMapper">
 
 
 	<sql id="columns">
 		a.id,
-		a.f_right_name,
-		a.f_right_url,
-		a.f_this_code,
-		a.f_parent_code,
-		a.f_right_order,
-		a.f_right_type,
-		a.f_status,
-		a.f_creat_time,
-		a.f_update_time
+		a.right_name,
+		a.right_url,
+		a.this_code,
+		a.parent_code,
+		a.right_order,
+		a.right_type,
+		a.status,
+		a.creat_time,
+		a.update_time
 	</sql>
 	<!--查询结果集 -->
-	<resultMap id="beanMap" type="com.hfq.house.manager.entity.model.SysMenu">
+	<resultMap id="beanMap" type="com.wx.mall.entity.model.SysMenu">
 		<result property="id" column="id"/>
-		<result property="rightName" column="f_right_name"/>
-		<result property="rightUrl" column="f_right_url"/>
-		<result property="thisCode" column="f_this_code"/>
-		<result property="parentCode" column="f_parent_code"/>
-		<result property="rightOrder" column="f_right_order"/>
-		<result property="rightType" column="f_right_type"/>
-		<result property="status" column="f_status"/>
-		<result property="creatTime" column="f_creat_time"/>
-		<result property="updateTime" column="f_update_time"/>
+		<result property="rightName" column="right_name"/>
+		<result property="rightUrl" column="right_url"/>
+		<result property="thisCode" column="this_code"/>
+		<result property="parentCode" column="parent_code"/>
+		<result property="rightOrder" column="right_order"/>
+		<result property="rightType" column="right_type"/>
+		<result property="status" column="status"/>
+		<result property="creatTime" column="creat_time"/>
+		<result property="updateTime" column="update_time"/>
 	</resultMap>
 
 	<select id="selectByPrimaryKey" resultMap="beanMap">
@@ -39,23 +39,23 @@
 	
 	<select id="selectUserAllRight" resultMap="beanMap">
 		select m.* from t_sys_user u left join t_sys_role r on
-		u.f_role = r.f_role_code left join t_sys_menu m
-		on r.f_role_right = m.f_this_code
-		where u.id = #{userId} and m.f_status = 1
+		u.role = r.role_code left join t_sys_menu m
+		on r.role_right = m.this_code
+		where u.id = #{userId} and m.status = 1
 	</select>
 
 	<!-- 选择更新 -->
-	<update id="updateSelective" parameterType="com.hfq.house.manager.entity.model.SysMenu">
+	<update id="updateSelective" parameterType="com.wx.mall.entity.model.SysMenu">
 		UPDATE t_sys_menu a
 		<trim prefix="set" suffixOverrides=",">
-			<if test="vo.rightName != null"> a.f_right_name = #{vo.rightName},</if>
-			<if test="vo.rightUrl != null"> a.f_right_url = #{vo.rightUrl},</if>
-			<if test="vo.thisCode != null"> a.f_this_code = #{vo.thisCode},</if>
-			<if test="vo.parentCode != null"> a.f_parent_code = #{vo.parentCode},</if>
-			<if test="vo.rightOrder != null"> a.f_right_order = #{vo.rightOrder},</if>
-			<if test="vo.status != null"> a.f_status = #{vo.status},</if>
-			<if test="vo.creatTime != null"> a.f_creat_time = #{vo.creatTime},</if>
-			<if test="vo.updateTime != null"> a.f_update_time = #{vo.updateTime},</if>
+			<if test="vo.rightName != null"> a.right_name = #{vo.rightName},</if>
+			<if test="vo.rightUrl != null"> a.right_url = #{vo.rightUrl},</if>
+			<if test="vo.thisCode != null"> a.this_code = #{vo.thisCode},</if>
+			<if test="vo.parentCode != null"> a.parent_code = #{vo.parentCode},</if>
+			<if test="vo.rightOrder != null"> a.right_order = #{vo.rightOrder},</if>
+			<if test="vo.status != null"> a.status = #{vo.status},</if>
+			<if test="vo.creatTime != null"> a.creat_time = #{vo.creatTime},</if>
+			<if test="vo.updateTime != null"> a.update_time = #{vo.updateTime},</if>
 		</trim>
 		WHERE a.id = #{vo.id}
 	</update>
