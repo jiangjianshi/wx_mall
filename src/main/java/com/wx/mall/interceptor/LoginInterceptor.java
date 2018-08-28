@@ -1,11 +1,19 @@
 package com.wx.mall.interceptor;
 
+import com.wx.mall.entity.model.SysUser;
+import com.wx.mall.mapper.SysUserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 登录拦截器
@@ -16,37 +24,39 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
+	@Autowired
+	private SysUserMapper sysUserMapper;
 
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
 
-//		if (handler instanceof HandlerMethod) {
-//			String uri = req.getRequestURI();
-//			List<String> exculdeList = Arrays.asList("/", "/error", "/index", "/login","/logout", "/IncJs.a");// 无需校验的URI
-//			if (exculdeList.contains(uri)) {
-//				return true;
-//			}
-//			HttpSession session = req.getSession();
-//			SysUser loginUser = (SysUser) session.getAttribute(session.getId());
-//			if (loginUser == null) {
-//				res.sendRedirect("/index");
-//				return false;
-//			}
-//			SysUser dbUser = sysUserMapper.selectByPrimaryKey(loginUser.getId());
-//			if (loginUser.getToken().equals(dbUser.getToken())) {
-//				return true;
-//			} else {
-//				res.setCharacterEncoding("UTF-8");
-//				res.setContentType("text/html; charset=utf-8");
-//				PrintWriter writer = res.getWriter();
-//				session.invalidate();
-//				writer.write("<center>登录token已过期，请重新登录.</center>");
-//				return false;
-//			}
-//		} else {
-//			return true;
-//		}
-		return  true;
+		if (handler instanceof HandlerMethod) {
+			String uri = req.getRequestURI();
+			List<String> exculdeList = Arrays.asList("/", "/error", "/index", "/login","/logout", "/IncJs.a");// 无需校验的URI
+			if (exculdeList.contains(uri)) {
+				return true;
+			}
+			HttpSession session = req.getSession();
+			SysUser loginUser = (SysUser) session.getAttribute(session.getId());
+			if (loginUser == null) {
+				res.sendRedirect("/index");
+				return false;
+			}
+			SysUser dbUser = sysUserMapper.selectByPrimaryKey(loginUser.getId());
+			if (loginUser.getToken().equals(dbUser.getToken())) {
+				return true;
+			} else {
+				res.setCharacterEncoding("UTF-8");
+				res.setContentType("text/html; charset=utf-8");
+				PrintWriter writer = res.getWriter();
+				session.invalidate();
+				writer.write("<center>登录token已过期，请重新登录.</center>");
+				return false;
+			}
+		} else {
+			return true;
+		}
+//		return  true;
 	}
 
 	@Override

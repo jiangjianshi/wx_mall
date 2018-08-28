@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.wx.mall.entity.model.SysUser;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public interface SysUserMapper {
 	
 	/**

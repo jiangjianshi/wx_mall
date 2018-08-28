@@ -36,14 +36,14 @@
 	<select id="selectByAccount" resultMap="beanMap">
 		select
 		<include refid="columns" />
-		from t_sys_user a
+		from sys_user a
 		where a.account = #{account} and a.status = 1
 	</select>
 	
 	<select id="selectByPrimaryKey" resultMap="beanMap">
 		select
 		<include refid="columns" />
-		from t_sys_user a
+		from sys_user a
 		where a.id = #{id}
 	</select>
 	
@@ -58,7 +58,7 @@
 			a.login_ip,
 			a.last_login_time,
 			a.create_time
-		from t_sys_user a
+		from sys_user a
 		<where>
 			<if test="account != null">
 				and a.account like concat('%',concat(#{account},'%'))
@@ -67,14 +67,14 @@
 	</select>
 	
 	<insert id="saveUser" parameterType="com.wx.mall.entity.model.SysUser">
-        insert into t_sys_user(account, role, password, real_name, salt, status, create_time) 
+        insert into sys_user(account, role, password, real_name, salt, status, create_time) 
        	 values
         (#{vo.account},#{vo.role},#{vo.password},#{vo.realName},#{vo.salt},#{vo.status},now());
     </insert>
     
 	<!-- 选择更新 -->
 	<update id="updateSelective" parameterType="com.wx.mall.entity.model.SysUser">
-		UPDATE t_sys_user a
+		UPDATE sys_user a
 		<trim prefix="set" suffixOverrides=",">
 			<if test="vo.account != null"> a.account = #{vo.account},</if>
 			<if test="vo.password != null"> a.password = #{vo.password},</if>
