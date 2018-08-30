@@ -1,28 +1,29 @@
 package com.wx.mall.controller;
 
+import com.wx.mall.common.CodeType;
+import com.wx.mall.entity.model.SysUser;
+import com.wx.mall.mapper.CodeTypeMapper;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import com.wx.mall.common.CodeType;
-import com.wx.mall.entity.model.SysUser;
-import com.wx.mall.mapper.CodeTypeMapper;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
-@RestController
+@Controller
 public class CommonController {
 
 	@Resource
 	private CodeTypeMapper codeTypeMapper;
 
+	@ResponseBody
 	@RequestMapping(path = "/IncJs.a")
 	public void CommsJsController(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -98,5 +99,11 @@ public class CommonController {
 
 		}
 		response.getWriter().write(wsbf.toString());
+	}
+
+	@RequestMapping(path = "/toPage")
+	public String toPage(String subPath, String file) {
+
+		return subPath + "/" + file;
 	}
 }

@@ -18,18 +18,6 @@ public class UserController extends BaseController {
 	@Resource
 	private UserService userService;
 
-	private static final String SUB_PATH = "users";
-
-	/**
-	 * 跳转列表页
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/toPage")
-	public ModelAndView toPage(String flag) {
-		ModelAndView mv = new ModelAndView(SUB_PATH + "/userManager");
-		return mv;
-	}
 
 	/**
 	 * 获取全部用户
