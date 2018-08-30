@@ -10,33 +10,20 @@ var dataGridParams = {
 		title : 'id',
 		hidden : true
 	}, {
-		field : 'account',
-		title : '账号',
+		field : 'catCode',
+		title : '类别编号',
 		align : 'left',
 		width : '20%'
 	}, {
-		field : 'role',
-		title : '角色',
+		field : 'catName',
+		title : '类别名称',
 		align : 'left',
-		width : '10%',
-		formatter : function(value, row) {
-			return get_js_codeText('role_types_js', value);
-		}
-	}, {
-		field : 'realName',
-		title : '真实姓名',
-		width : '15%',
-	},  {
-		field : 'salt',
-		title : '加密盐值',
-		align : 'left',
-		hidden : true,
-		width : '25%'
+		width : '20%'
 	}, {
 		field : 'status',
 		title : '账号状态',
 		align : 'left',
-		width : '10%',
+		width : '20%',
 		formatter : function(value) {
 			if(value == '2'){
 				return '<span style="color:red">无效</span>';
@@ -48,17 +35,12 @@ var dataGridParams = {
 		field : 'createTime',
 		title : '新增时间',
 		align : 'left',
-		width : '15%'
-	}, {
-		field : 'lastLoginTime',
-		title : '最后登录时间',
+		width : '20%'
+	},  {
+		field : 'updateTime',
+		title : '更新时间',
 		align : 'left',
-		width : '15%'
-	} ,  {
-		field : 'loginIp',
-		title : '上传登录IP',
-		align : 'left',
-		width : '25%'
+		width : '20%'
 	}] ]
 };
 
@@ -112,19 +94,6 @@ opt = {
 		$('#searchForm').form('clear');
 		grid.datagrid('reload', dataGridParams.queryParams);
 	},
-	edit : function() {
-		var row = grid.datagrid("getSelected");
-		if(row == null){
-			alert("请选中要编辑信息")
-		}else{
-			$('#addUser').dialog('open').dialog('center').dialog('setTitle','修改密码');
-			$('#addForm').form('load',row);
-			$("#password").textbox('setValue','');  //清空密码
-			$('#account').textbox('textbox').attr("disabled", "disabled");
-			$('#role').combo('readonly', true);
-			$('#realName').textbox('textbox').attr("disabled", "disabled");
-		}
-	},
 	del : function() {
 		var row = grid.datagrid("getSelected");
 		if(row == null){
@@ -154,13 +123,10 @@ opt = {
 		
 	},
 	add : function() {
-		$('#addUser').dialog('open').dialog('center').dialog('setTitle','添加用户');
+		$('#addCategory').dialog('open').dialog('center').dialog('setTitle','添加分类');
         $('#addForm').form('clear');
-        $('#account').textbox('textbox').removeAttr("disabled");
-        $('#role').combo('readonly', false);
-		$('#realName').textbox('textbox').removeAttr("disabled");
 	},
-	saveUser : function() {
+	saveCategory : function() {
 		$('#addForm').form('submit',{
             url: '/user/saveOrUpdateUsers',
             onSubmit: function(){
@@ -170,11 +136,14 @@ opt = {
                 var result = eval('('+result+')');
                 if (result.status == 0){
                 	showMessage("处理结果", result.msg, 1000);
-                	 $('#addUser').dialog('close');// close the dialog
+                	 $('#addCategory').dialog('close');// close the dialog
                      grid.datagrid('reload');    // reload the user data
                 } else {
                      alert(result.msg);
                 }
+            },
+            error : function() {
+                alert("操作失败，请联系管理员")
             }
         });
 	}

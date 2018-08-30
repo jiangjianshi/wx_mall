@@ -4,6 +4,7 @@ import com.wx.mall.common.CodeType;
 import com.wx.mall.entity.model.SysUser;
 import com.wx.mall.mapper.CodeTypeMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -101,7 +102,7 @@ public class CommonController {
 		response.getWriter().write(wsbf.toString());
 	}
 
-	@RequestMapping(path = "/toPage")
+	@GetMapping(path = "/toPage")
 	public String toPage(String subPath, String file) {
 
 		return subPath + "/" + file;
